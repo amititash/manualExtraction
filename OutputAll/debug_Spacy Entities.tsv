@@ -1,0 +1,70 @@
+airbag;tp
+vehicle;fp
+manual;tp
+switch;fp
+lock;fp
+latch;tp
+crs;tp
+manual 3;fp
+through-loading system;fn
+travel head restraint;fn
+seat;fn
+door;fn
+upper retaining strap;fn
+rear window shelf;fn
+upper mounting point;fn
+internal harness;fn
+mount;fn
+headrest;fn
+front passenger airbags;fn
+belt buckle;fn
+harness;fn
+mounting point;fn
+seat backrest;fn
+mounting point/eye;fn
+mounting point cover;fn
+back seat;fn
+child seat security;fn
+lower latch anchorss;fn
+tether;fn
+head restraint;fn
+passenger seat;fn
+safety belt;fn
+front passenger safety belt;fn
+lower latch anchors;fn
+latch child restraint fixing system;fn
+rear safety belt;fn
+belt;fn
+belt guide position;fn
+passenger safety belt;fn
+safety switch;fn
+accident;fn
+operating and safety information;fn
+front passenger seat;fn
+rear seat backrest;fn
+tether strap;fn
+button;fn
+child restraint fixing system;fn
+retaining strap;fn
+locking lever;fn
+vehicle equipment;fn
+mounting eyes;fn
+strap guide;fn
+lower anchors and tether for children;fn
+fixing point;fn
+passenger airbags;fn
+user's manual;fn
+hook;fn
+windows;fn
+backrest;fn
+child seat;fn
+latch anchors;fn
+side airbags;fn
+vehicle seat;fn
+upper fixing point;fn
+strap;fn
+belt webbing;fn
+headrest height;fn
+rear doors;fn
+backrest width;fn
+front, knee and side airbags;fn
