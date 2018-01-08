@@ -89,6 +89,8 @@ We also included a test model file that tests different models on training data.
 [Google API Relations](https://github.com/Srivatsava/manualExtraction/blob/master/OutputSample/output_rel_ge_child.csv): Relations extracted from openIE and Google API entities.
 
 [SpacyNounChunks API Relations](https://github.com/Srivatsava/manualExtraction/blob/master/OutputSample/output_rel_nc_child.csv): Relations extracted from openIE and Spacy Nounchunk entities.
+
+[Results On All Data](https://github.com/Srivatsava/manualExtraction/tree/master/OutputAll): The similar results on all the data is in this folder.
  
 Final Results on the goldenset for this small dataset:
 
