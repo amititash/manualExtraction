@@ -14,6 +14,7 @@ The project uses the following prerequisites that can be installed via pip or co
     pip install scipy
     pip install sklearn
     pip install -U nltk
+    python -m spacy download en
 
  We use google cloud api to get entities as well as spacy's noun chunks api. For google api, please go through [Google API Getting Started](https://cloud.google.com/natural-language/docs/quickstart) to establish your credentials and set google application credentials path locally. Install python client library
  
