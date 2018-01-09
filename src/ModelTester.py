@@ -20,16 +20,13 @@ from sklearn import metrics
 from sklearn.model_selection import ShuffleSplit
 from sklearn.model_selection import GridSearchCV
 import numpy as np
-import time, csv
+import time, csv, argparse
 
 import string
 punctuations = string.punctuation
 
 import spacy
 parser = spacy.load("en")
-
-#Replace this with your training data location
-training_data = r'C:\projects\manualExtraction\Model\trainingdata.tsv'
 
 #Custom transformer using spaCy 
 class predictors(TransformerMixin):
@@ -73,103 +70,112 @@ class MeanEmbeddingVectorizer(object):
             for words in X
         ])
 
-#create vectorizer object to generate feature vectors, we will use custom spacy’s tokenizer
-vectorizer = CountVectorizer(tokenizer = spacy_tokenizer, ngram_range=(1,1)) 
+if __name__ == '__main__':
+    print("-----------------------------------")
+    print("Testing different models")
+    print("-----------------------------------")
+    argparser = argparse.ArgumentParser()
+    argparser.add_argument("training_data", help="Training data with positive and negative examples")
+    args = argparser.parse_args()
 
-# Load sample data
-all_data=[]
-try:
-    with open(training_data, 'r') as tsvin:
-                tsvin = csv.reader(tsvin, delimiter='\t')
-                for row in tsvin:
-                    all_data.append((row[0], row[1]))
-except IOError:
-        print("Could not read file:" + training_data)
+    training_data = args.training_data
+    #create vectorizer object to generate feature vectors, we will use custom spacy’s tokenizer
+    vectorizer = CountVectorizer(tokenizer = spacy_tokenizer, ngram_range=(1,1)) 
 
-#grid search
+    # Load sample data
+    all_data=[]
+    try:
+        with open(training_data, 'r') as tsvin:
+                    tsvin = csv.reader(tsvin, delimiter='\t')
+                    for row in tsvin:
+                        all_data.append((row[0], row[1]))
+    except IOError:
+            print("Could not read file:" + training_data)
 
-grid = [{'classifier__C': [1, 10, 100, 1000],'classifier__kernel': ['linear']}, {'classifier__kernel': ['rbf'], 'classifier__C': [1, 10, 100, 1000], 'classifier__gamma': [0.001, 0.0001]}]
+    #grid search
 
-pipe = Pipeline([("cleaner", predictors()),
-                 ('vectorizer', vectorizer),
-                 ('tfidftransformer', TfidfTransformer()),
-                 ('classifier', SVC())])
+    grid = [{'classifier__C': [1, 10, 100, 1000],'classifier__kernel': ['linear']}, {'classifier__kernel': ['rbf'], 'classifier__C': [1, 10, 100, 1000], 'classifier__gamma': [0.001, 0.0001]}]
 
-print(pipe.get_params().keys())
-cv = ShuffleSplit(n_splits=5, test_size=0.3, random_state=0)
-clf = GridSearchCV(pipe, grid, cv=cv)
-start = time.clock()
-clf.fit([x[0] for x in all_data], [x[1] for x in all_data])
-print("time: " + str(time.clock()-start))
-print("Best parameters set found on development set:")
-print()
-print(clf.best_params_)
-print()
-print("Grid scores on development set:")
-print()
-means = clf.cv_results_['mean_test_score']
-stds = clf.cv_results_['std_test_score']
-for mean, std, params in zip(means, stds, clf.cv_results_['params']):
-    print("%0.3f (+/-%0.03f) for %r"
-            % (mean, std * 2, params))
-print()
-
-names = ["Nearest Neighbors", "Linear SVM", "SVC10", "RBF SVM", "Gaussian Process",
-         "Decision Tree", "Random Forest", "Neural Net", "AdaBoost",
-         "Naive Bayes", "QDA"]
-
-classifiers = [
-    KNeighborsClassifier(3),
-    LinearSVC(),
-    SVC(C=10, kernel='linear'),
-    SVC(gamma=2, C=1),
-    GaussianProcessClassifier(1.0 * RBF(1.0)),
-    DecisionTreeClassifier(max_depth=5),
-    RandomForestClassifier(max_depth=5, n_estimators=10, max_features=1),
-    MLPClassifier(alpha=1),
-    AdaBoostClassifier(),
-    GaussianNB(),
-    QuadraticDiscriminantAnalysis()]
-
-
-for i in range(len(classifiers)):
-    start = time.clock()
     pipe = Pipeline([("cleaner", predictors()),
-                 ('vectorizer', vectorizer),
-                 ('to_dense', DenseTransformer()),
-                 ('classifier', classifiers[i])])
+                     ('vectorizer', vectorizer),
+                     ('tfidftransformer', TfidfTransformer()),
+                     ('classifier', SVC())])
+
+    print(pipe.get_params().keys())
     cv = ShuffleSplit(n_splits=5, test_size=0.3, random_state=0)
-    scores = cross_val_score(pipe, [x[0] for x in all_data], [x[1] for x in all_data], cv=cv)
-    print(scores)
-    print("Classifier:%s Accuracy: %0.2f (+/- %0.2f) %f" % (names[i], scores.mean(), scores.std() * 2, time.clock() - start))
-
-
-print("With tfidfvectorizer")
-
-for i in range(len(classifiers)):
+    clf = GridSearchCV(pipe, grid, cv=cv)
     start = time.clock()
-    pipe = Pipeline([("cleaner", predictors()),
-                 ('vectorizer', vectorizer),
-                 ('tfidftransformer', TfidfTransformer()),
-                 ('to_dense', DenseTransformer()),
-                 ('classifier', classifiers[i])])
-    cv = ShuffleSplit(n_splits=5, test_size=0.3, random_state=0)
-    scores = cross_val_score(pipe, [x[0] for x in all_data], [x[1] for x in all_data], cv=cv)
-    print(scores)
-    print("Classifier:%s Accuracy: %0.2f (+/- %0.2f) %f" % (names[i], scores.mean(), scores.std() * 2, time.clock() - start))
+    clf.fit([x[0] for x in all_data], [x[1] for x in all_data])
+    print("time: " + str(time.clock()-start))
+    print("Best parameters set found on development set:")
+    print()
+    print(clf.best_params_)
+    print()
+    print("Grid scores on development set:")
+    print()
+    means = clf.cv_results_['mean_test_score']
+    stds = clf.cv_results_['std_test_score']
+    for mean, std, params in zip(means, stds, clf.cv_results_['params']):
+        print("%0.3f (+/-%0.03f) for %r"
+                % (mean, std * 2, params))
+    print()
 
-print("With meanEmbeddingVectorizer")
+    names = ["Nearest Neighbors", "Linear SVM", "SVC10", "RBF SVM", "Gaussian Process",
+             "Decision Tree", "Random Forest", "Neural Net", "AdaBoost",
+             "Naive Bayes", "QDA"]
 
-for i in range(len(classifiers)):
-    start = time.clock()
-    pipe = Pipeline([("cleaner", predictors()),
-                 ('embedding', MeanEmbeddingVectorizer()),
-                 ('classifier', classifiers[i])])
-    cv = ShuffleSplit(n_splits=5, test_size=0.3, random_state=0)
-    scores = cross_val_score(pipe, [x[0] for x in all_data], [x[1] for x in all_data], cv=cv)
-    print(scores)
-    print("Classifier:%s Accuracy: %0.2f (+/- %0.2f) %f" % (names[i], scores.mean(), scores.std() * 2, time.clock() - start))
+    classifiers = [
+        KNeighborsClassifier(3),
+        LinearSVC(),
+        SVC(C=10, kernel='linear'),
+        SVC(gamma=2, C=1),
+        GaussianProcessClassifier(1.0 * RBF(1.0)),
+        DecisionTreeClassifier(max_depth=5),
+        RandomForestClassifier(max_depth=5, n_estimators=10, max_features=1),
+        MLPClassifier(alpha=1),
+        AdaBoostClassifier(),
+        GaussianNB(),
+        QuadraticDiscriminantAnalysis()]
 
-#Try guassian process and linear with different parameters
 
-print("done!!")
+    for i in range(len(classifiers)):
+        start = time.clock()
+        pipe = Pipeline([("cleaner", predictors()),
+                     ('vectorizer', vectorizer),
+                     ('to_dense', DenseTransformer()),
+                     ('classifier', classifiers[i])])
+        cv = ShuffleSplit(n_splits=5, test_size=0.3, random_state=0)
+        scores = cross_val_score(pipe, [x[0] for x in all_data], [x[1] for x in all_data], cv=cv)
+        print(scores)
+        print("Classifier:%s Accuracy: %0.2f (+/- %0.2f) %f" % (names[i], scores.mean(), scores.std() * 2, time.clock() - start))
+
+
+    print("With tfidfvectorizer")
+
+    for i in range(len(classifiers)):
+        start = time.clock()
+        pipe = Pipeline([("cleaner", predictors()),
+                     ('vectorizer', vectorizer),
+                     ('tfidftransformer', TfidfTransformer()),
+                     ('to_dense', DenseTransformer()),
+                     ('classifier', classifiers[i])])
+        cv = ShuffleSplit(n_splits=5, test_size=0.3, random_state=0)
+        scores = cross_val_score(pipe, [x[0] for x in all_data], [x[1] for x in all_data], cv=cv)
+        print(scores)
+        print("Classifier:%s Accuracy: %0.2f (+/- %0.2f) %f" % (names[i], scores.mean(), scores.std() * 2, time.clock() - start))
+
+    print("With meanEmbeddingVectorizer")
+
+    for i in range(len(classifiers)):
+        start = time.clock()
+        pipe = Pipeline([("cleaner", predictors()),
+                     ('embedding', MeanEmbeddingVectorizer()),
+                     ('classifier', classifiers[i])])
+        cv = ShuffleSplit(n_splits=5, test_size=0.3, random_state=0)
+        scores = cross_val_score(pipe, [x[0] for x in all_data], [x[1] for x in all_data], cv=cv)
+        print(scores)
+        print("Classifier:%s Accuracy: %0.2f (+/- %0.2f) %f" % (names[i], scores.mean(), scores.std() * 2, time.clock() - start))
+
+    #Try guassian process and linear with different parameters
+
+    print("done!!")

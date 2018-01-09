@@ -33,7 +33,7 @@ def extract_relationships(input_file, jar_path, descriptions_file, relations_fil
 
 if __name__ == '__main__':
     print("-----------------------------------")
-    print("Extracting descriptions from input file")
+    print("Extracting Relationships from input file")
     print("-----------------------------------")
     argparser = argparse.ArgumentParser()
     argparser.add_argument("input", help="Input Json file having the manual contents")

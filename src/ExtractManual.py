@@ -6,6 +6,9 @@ import Utils
 categories_to_filter_out = 'No Category;Contents;Reference;Technical data;Everything from A to Z'
 
 if __name__ == '__main__':
+    print("-----------------------------------")
+    print("Extract Entities and Relationships from Manual data")
+    print("-----------------------------------")
     argparser = argparse.ArgumentParser()
     argparser.add_argument("input", help="Input Json file having the manual contents")
     argparser.add_argument("openiejar", help="Path of open ie jar used to extract relationships")
