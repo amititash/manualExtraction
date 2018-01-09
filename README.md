@@ -75,9 +75,9 @@ path_to_goldenset: The true entities that we want to extract. We have included a
 
 We also included a test model file that tests different models on training data. To run that:
 
-    python ModelTester.py
+    python ModelTester.py <path_to_training_data_file>
     
- Make sure to replace the input training_data file in this method before running it.
+path_to_training_data_file: This is the path to training data file included in the [Model](https://github.com/Srivatsava/manualExtraction/tree/master/Model) folder.     
  
  # Output Files
  A number of sample output files were included for evaluation purposes in the [OutputSample](https://github.com/Srivatsava/manualExtraction/tree/master/OutputSample) Folder. 
