@@ -5,6 +5,7 @@ Project to extract from a vehicle manual
 This project uses Python3.5. Using [anaconda](https://conda.io/docs/user-guide/install/index.html), you can create a new environment with this command:
 
     conda create -n myenv python=3.5
+    conda activate myenv
 
 The project uses the following prerequisites that can be installed via pip or conda. Assuming python and pip to be already installed.
     
