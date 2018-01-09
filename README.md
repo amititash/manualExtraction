@@ -33,8 +33,11 @@ To run the entire code use the following command:
     python ExtractManual.py <path_to_input_file> <path_to_openie_jar> <path_to_output_folder> <path_to_model>
 
 path_to_input_file: This is the path to input json file included in the [Input](https://github.com/Srivatsava/manualExtraction/tree/master/Input) folder.
+
 path_to_openie_jar: This is the path to openie jar file included in the [OpenIE](https://github.com/Srivatsava/manualExtraction/tree/master/OpenIE) folder.
+
 path_to_output_folder: This is the path to openie output folder where we want the output files to be in.
+
 path_to_model: This is the path to model (.pkl) file included in the [Model](https://github.com/Srivatsava/manualExtraction/tree/master/Model) folder. 
 
 This will automatically extract the relationships using openie, entities using spacy and google api, applies the model to improve precision on the extracted entities and filters out relationships that have a subject and object that are not related to the extracted entities.
@@ -45,7 +48,9 @@ Train Model:
     python Train.py <path_to_training_data_file> <path_to_model>
 
 path_to_training_data_file: This is the path to training data file included in the [Model](https://github.com/Srivatsava/manualExtraction/tree/master/Model) folder. 
+
 path_to_model: This is the path to output model file where we want to put our model. 
+
 This command trains the linear svm model to train on the training dataset and dump the model. It also reports training accuracy.
 
 Extract relationships:
@@ -53,9 +58,14 @@ Extract relationships:
     python ExtractRelationships.py <path_to_input_file> <path_to_openie_jar> -outputDesc <path_to_output_descriptions> <path_to_output_relationships>
     
 path_to_input_file: This is the path to input json file included in the [Input](https://github.com/Srivatsava/manualExtraction/tree/master/Input) folder.
+
 path_to_openie_jar: This is the path to openie jar file included in the [OpenIE](https://github.com/Srivatsava/manualExtraction/tree/master/OpenIE) folder.
+
 path_to_output_descriptions: This is the path to the output cleaned descriptions file.
+
 path_to_output_relationships: This is the path to the output relationships file.
+
+This command extracts the relationships from the input file using OpenIE
 
 To test on a golden set using extracted relationships, you can use:
 
