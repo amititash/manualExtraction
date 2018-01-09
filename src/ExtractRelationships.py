@@ -43,5 +43,5 @@ if __name__ == '__main__':
     argparser.add_argument("output_relations_file", help="Output file path for relationships extracted")
     args = argparser.parse_args()
 
-    extract_relationships(args.input, args.jar, args.outputDesc, args.outputRel, args.categories_to_filter_out)
+    extract_relationships(args.input, args.jar, args.output_descriptions_file, args.output_relations_file, args.categories_to_filter_out)
 
