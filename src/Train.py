@@ -24,6 +24,15 @@ def trainAndDumpModel(training_data, model_file):
     except IOError:
         print("Could not read file:" + model_file)
 
+    try:
+        with open(model_file, 'rb') as fid:
+            model = pickle.load(fid)
+    except IOError:
+        print("Could not read file:" + model_file)
+
+    score = model.score(X, Y)
+    print(score)
+
 if __name__ == '__main__':
     print("-----------------------------------")
     print("Training model from training data")
@@ -34,11 +43,3 @@ if __name__ == '__main__':
     args = argparser.parse_args()
 
     trainAndDumpModel(args.training_data, args.model_file)
-    try:
-        with open(args.model_file, 'rb') as fid:
-            model = pickle.load(fid)
-    except IOError:
-        print("Could not read file:" + args.model_file)
-
-    score = model.score(X, Y)
-    print(score)
