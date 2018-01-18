@@ -1,48 +1,39 @@
-seat;backrest,9
-safety belt;seat,5
+seat;backrest,6
+passenger seat;airbags,5
+button;head restraint,5
 child restraint fixing system;belt,5
-airbag;passenger seat,5
-head restraint;button,5
 child restraint fixing system;passenger seat,5
-window;door,4
-seat;head restraint,4
-safety belt;door,4
-airbag;head,3
-driver's seat belt;door,3
-backrest;seat,3
+backrest;child seat,4
+head restraint;seat,4
+windows;doors,4
+child restraint fixing system;airbags,3
 child restraint fixing system;strap,3
-passenger seat;passenger airbag,3
-belt;latch plat,3
-child restraint fixing system;airbag,3
-switch;window,3
-passenger seat;side airbag,3
-child restraint fixing system;safety belt,2
-backrest;child restraint fixing system,2
-lock;door,2
-passenger seat;child restraint fixing system,2
-head restraint;backrest,2
-passenger seat;backrest width,2
-head restraint;seat,2
-safety switch;window,2
-seat;belt,2
-seat;button,2
-child restraint fixing system;side airbag,2
-child restraint fixing system;retaining strap,2
-child restraint fixing system;seat,2
-seat;belt buckl,2
-transmitter button;mirror button,2
-head restraint;strap,2
-airbag;child seat,2
-head restraint;retaining strap,2
-equipment vers;button,2
-passenger seat;belt,2
+button;windows,3
+side airbag;airbags,3
+head restraint;seats,2
+seat;belt buckle,2
+side airbags;passenger seat,2
+center safety belt;belt lock,2
 child restraint fixing system;backrest width,2
-door;button,2
-child seat;backrest,2
-backrest;child seat,2
-child restraint fixing system;passenger airbag,2
-belt lock;center safety belt,2
-child seat;passenger airbag,2
+backrest;head restraint,2
+window defroster;button,2
+equipment version;buttons,2
+seat;belt,2
+latch plate;belt,2
+hooks;multi - function hook,2
+head restraints;seats,2
+retaining strap;child restraint fixing system,2
+side airbags;child restraint fixing system,2
+passenger airbags;child seat,2
+passenger seat;child restraint fixing system,2
+transmitter button;mirror button,2
+button;doors,2
+windows;safety switch,2
+button;seat,2
+passenger seat;belt,2
+airbags;child seat,2
+safety belt;seats,2
+seat;backrests,2
+switch;window,2
 child restraint fixing system;backrest,2
-switch;button,2
-button;door,2
+head airbag;airbags,2
