@@ -57,11 +57,13 @@ This command trains the linear svm model to train on the training dataset and du
 
 Extract relationships:
     
-    python ExtractRelationships.py <path_to_input_file> <path_to_openie_jar> -outputDesc <path_to_output_descriptions> <path_to_output_relationships>
+    python ExtractRelationships.py <path_to_input_file> <path_to_openie_jar> <categories_to_filter_out> <path_to_output_descriptions> <path_to_output_relationships>
     
 path_to_input_file: This is the path to input json file included in the [Input](https://github.com/Srivatsava/manualExtraction/tree/master/Input) folder.
 
 path_to_openie_jar: This is the path to openie jar file included in the [OpenIE](https://github.com/Srivatsava/manualExtraction/tree/master/OpenIE) folder.
+
+categories_to_filter_out: The string containing all categories to filter out. eg. "No Category;Contents;Reference;Technical data;Everything from A to Z"
 
 path_to_output_descriptions: This is the path to the output cleaned descriptions file.
 
