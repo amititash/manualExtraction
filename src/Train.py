@@ -1,7 +1,7 @@
-import TrainAndPredictUtils
 import string, csv, argparse, pickle
+from trainAndPredictUtils import get_pipeline
 
-def trainAndDumpModel(training_data, model_file):
+def train_and_output_model(training_data, model_file):
     all_data=[]
 
     try:
@@ -12,7 +12,7 @@ def trainAndDumpModel(training_data, model_file):
     except IOError:
         print("Could not read file:" + training_data)
 
-    pipe = TrainAndPredictUtils.get_pipeline()
+    pipe = get_pipeline()
     X = [x[0] for x in all_data]
     Y = [x[1] for x in all_data]
 
@@ -24,13 +24,7 @@ def trainAndDumpModel(training_data, model_file):
     except IOError:
         print("Could not read file:" + model_file)
 
-    try:
-        with open(model_file, 'rb') as fid:
-            model = pickle.load(fid)
-    except IOError:
-        print("Could not read file:" + model_file)
-
-    score = model.score(X, Y)
+    score = pipe.score(X, Y)
     print(score)
 
 if __name__ == '__main__':
@@ -42,4 +36,9 @@ if __name__ == '__main__':
     argparser.add_argument("model_file", help="Path of model file output")
     args = argparser.parse_args()
 
-    trainAndDumpModel(args.training_data, args.model_file)
+    train_and_output_model(args.training_data, args.model_file)
+    try:
+        with open(args.model_file, 'rb') as fid:
+            model = pickle.load(fid)
+    except IOError:
+        print("Could not read file:" + args.model_file)
