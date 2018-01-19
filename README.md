@@ -32,7 +32,7 @@ Extractions from Conjunctive Sentences uses Berkeley Language Model. Download th
 
 To run the entire code use the following command:
 
-    python ExtractManual.py <path_to_input_file> <path_to_openie_jar> <path_to_output_folder> <path_to_training_data_file>
+    python extractManual.py <path_to_input_file> <path_to_openie_jar> <path_to_output_folder> <path_to_training_data_file>
 
 path_to_input_file: This is the path to input json file included in the [Input](https://github.com/Srivatsava/manualExtraction/tree/master/Input) folder.
 
@@ -47,7 +47,7 @@ This will automatically extract the relationships using openie, entities using s
 There are two more utils you can use to run.
 Train Model:
 
-    python Train.py <path_to_training_data_file> <path_to_model>
+    python train.py <path_to_training_data_file> <path_to_model>
 
 path_to_training_data_file: This is the path to training data file included in the [Model](https://github.com/Srivatsava/manualExtraction/tree/master/Model) folder. 
 
@@ -57,7 +57,7 @@ This command trains the linear svm model to train on the training dataset and du
 
 Extract relationships:
     
-    python ExtractRelationships.py <path_to_input_file> <path_to_openie_jar> <categories_to_filter_out> <path_to_output_descriptions> <path_to_output_relationships>
+    python extractRelationships.py <path_to_input_file> <path_to_openie_jar> <categories_to_filter_out> <path_to_output_descriptions> <path_to_output_relationships>
     
 path_to_input_file: This is the path to input json file included in the [Input](https://github.com/Srivatsava/manualExtraction/tree/master/Input) folder.
 
@@ -73,13 +73,13 @@ This command extracts the relationships from the input file using OpenIE
 
 To test on a golden set using extracted relationships, you can use:
 
-    python ExtractManual.py <path_to_input_file> <path_to_openie_jar> <path_to_output_folder> <path_to_model> --extractedRel <path_to_extracted_relationships> --goldenset <path_to_goldenset>
+    python extractManual.py <path_to_input_file> <path_to_openie_jar> <path_to_output_folder> <path_to_model> --extractedRel <path_to_extracted_relationships> --goldenset <path_to_goldenset>
     
 path_to_goldenset: The true entities that we want to extract. We have included a sample file [here](https://github.com/Srivatsava/manualExtraction/blob/master/Input/goldenset_child.tsv).
 
 We also included a test model file that tests different models on training data. To run that:
 
-    python ModelTester.py <path_to_training_data_file>
+    python modelTester.py <path_to_training_data_file>
     
 path_to_training_data_file: This is the path to training data file included in the [Model](https://github.com/Srivatsava/manualExtraction/tree/master/Model) folder.     
  
