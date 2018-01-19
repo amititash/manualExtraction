@@ -32,7 +32,7 @@ Extractions from Conjunctive Sentences uses Berkeley Language Model. Download th
 
 To run the entire code use the following command:
 
-    python ExtractManual.py <path_to_input_file> <path_to_openie_jar> <path_to_output_folder> <path_to_model>
+    python ExtractManual.py <path_to_input_file> <path_to_openie_jar> <path_to_output_folder> <path_to_training_data_file>
 
 path_to_input_file: This is the path to input json file included in the [Input](https://github.com/Srivatsava/manualExtraction/tree/master/Input) folder.
 
@@ -40,7 +40,7 @@ path_to_openie_jar: This is the path to openie jar file included in the [OpenIE]
 
 path_to_output_folder: This is the path to openie output folder where we want the output files to be in.
 
-path_to_model: This is the path to model (.pkl) file included in the [Model](https://github.com/Srivatsava/manualExtraction/tree/master/Model) folder. 
+path_to_training_data_file: This is the path to training data file included in the [Model](https://github.com/Srivatsava/manualExtraction/tree/master/Model) folder.
 
 This will automatically extract the relationships using openie, entities using spacy and google api, applies the model to improve precision on the extracted entities and filters out relationships that have a subject and object that are not related to the extracted entities.
 
